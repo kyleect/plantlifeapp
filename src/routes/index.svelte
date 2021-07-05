@@ -8,6 +8,15 @@
 			};
 		}
 	}
+
+	async function loadPlants(fetch) {
+		const url = `/plants`;
+		const res = await fetch(url);
+
+		if (res.ok) {
+			return await res.json();
+		}
+	}
 </script>
 
 <script>
@@ -32,15 +41,6 @@
 		schedule = '';
 
 		plants = (await loadPlants(fetch)) ?? [];
-	}
-
-	async function loadPlants(fetch) {
-		const url = `/plants`;
-		const res = await fetch(url);
-
-		if (res.ok) {
-			return await res.json();
-		}
 	}
 </script>
 
