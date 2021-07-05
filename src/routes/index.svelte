@@ -13,12 +13,10 @@
 	<h3>Existing</h3>
 
 	<ul>
-		<tbody>
-			{#each $plants as plant}
-				<li>
-					<td><a href={`/plants/${plant.id}`}>{plant.name}</a></td>
-				</li>
-			{/each}
-		</tbody>
+		{#each $plants as plant}
+			<li>
+				<td><a href={`/plants/${plant.id}`}>{plant.name}</a></td>
+			</li>
+		{/each}
 	</ul>
 {/if}
