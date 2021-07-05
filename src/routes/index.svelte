@@ -23,33 +23,32 @@
 
 <h2>Plants</h2>
 
+<h3>Add</h3>
+
 <form on:submit|preventDefault={onSubmit}>
 	<div>
-		<label for="name">Name</label>
+		<label for="name">Name</label><br />
 		<input type="text" name="name" bind:value={name} required />
 	</div>
+	<br />
 	<div>
-		<label for="schedule">Schedule</label>
+		<label for="schedule">Schedule</label><br />
 		<input type="text" name="schedule" bind:value={schedule} required />
 	</div>
+	<br />
 	<button>Add</button>
 </form>
 
 {#if $plants.length > 0}
-	<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Schedule</th>
-			</tr>
-		</thead>
+	<h3>Existing</h3>
+
+	<ul>
 		<tbody>
 			{#each $plants as plant}
-				<tr>
+				<li>
 					<td><a href={`/plants/${plant.id}`}>{plant.name}</a></td>
-					<td>{plant.schedule}</td>
-				</tr>
+				</li>
 			{/each}
 		</tbody>
-	</table>
+	</ul>
 {/if}

@@ -12,6 +12,10 @@
 	import Nav from '../components/Nav.svelte';
 </script>
 
+<svelte:head>
+	<title>Plant Life</title>
+</svelte:head>
+
 <Nav />
 
 <h1>Plant Life</h1>
