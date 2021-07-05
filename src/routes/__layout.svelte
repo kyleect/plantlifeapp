@@ -8,5 +8,12 @@
 	}
 </script>
 
+<script>
+	import Nav from '../components/Nav.svelte';
+</script>
+
+<Nav />
+
 <h1>Plant Life</h1>
+
 <slot />
