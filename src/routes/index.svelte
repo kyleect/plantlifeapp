@@ -25,9 +25,7 @@
 	let name;
 	let schedule;
 
-	async function onSubmit(e) {
-		e.preventDefault();
-
+	async function onSubmit() {
 		await fetch('/api/plants', {
 			method: 'POST',
 			headers: {
@@ -35,7 +33,7 @@
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({ name, schedule })
-		}).then((res) => res.json());
+		});
 
 		name = '';
 		schedule = '';
@@ -46,7 +44,7 @@
 
 <h1>Plants {plants.length}</h1>
 
-<form on:submit={onSubmit}>
+<form on:submit|preventDefault={onSubmit}>
 	<div>
 		<label for="name">Name</label>
 		<input type="text" name="name" bind:value={name} required />
