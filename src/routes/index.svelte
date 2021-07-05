@@ -1,26 +1,5 @@
-<script context="module">
-	export async function load({ fetch }) {
-		const plants = await loadPlants(fetch);
-
-		if (plants) {
-			return {
-				props: { plants }
-			};
-		}
-	}
-
-	async function loadPlants(fetch) {
-		const url = `/api/plants`;
-		const res = await fetch(url);
-
-		if (res.ok) {
-			return await res.json();
-		}
-	}
-</script>
-
 <script>
-	export let plants = [];
+	import plants, { loadPlants } from '../stores/plants.store';
 
 	let name;
 	let schedule;
@@ -38,11 +17,11 @@
 		name = '';
 		schedule = '';
 
-		plants = (await loadPlants(fetch)) ?? [];
+		await loadPlants(fetch);
 	}
 </script>
 
-<h1>Plants {plants.length}</h1>
+<h2>Plants</h2>
 
 <form on:submit|preventDefault={onSubmit}>
 	<div>
@@ -56,19 +35,21 @@
 	<button>Add</button>
 </form>
 
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Schedule</th>
-		</tr>
-	</thead>
-	<tbody>
-		{#each plants as plant}
+{#if $plants.length > 0}
+	<table>
+		<thead>
 			<tr>
-				<td><a href={`/plants/${plant.id}`}>{plant.name}</a></td>
-				<td>{plant.schedule}</td>
+				<th>Name</th>
+				<th>Schedule</th>
 			</tr>
-		{/each}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			{#each $plants as plant}
+				<tr>
+					<td><a href={`/plants/${plant.id}`}>{plant.name}</a></td>
+					<td>{plant.schedule}</td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
+{/if}

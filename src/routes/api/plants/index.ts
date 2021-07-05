@@ -7,7 +7,6 @@ export async function get() {
 }
 
 export async function post(request) {
-    console.log(request.body);
     const result = await fetch('http://localhost:3001/plant', {
         method: "POST",
         headers: {

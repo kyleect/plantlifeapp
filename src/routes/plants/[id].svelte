@@ -1,43 +1,41 @@
 <script context="module">
-	export async function load({ page, fetch }) {
-		const plant = await loadPlant(fetch, page.params.id);
-
-		if (plant) {
-			return {
-				props: { plant, id: page.params.id }
-			};
-		}
-	}
-
-	async function loadPlant(fetch, id) {
-		const url = `/api/plants/${id}`;
-		const res = await fetch(url);
-
-		if (res.ok) {
-			return await res.json();
-		}
+	export function load({ page }) {
+		return {
+			props: {
+				id: parseInt(page.params.id, 10)
+			}
+		};
 	}
 </script>
 
 <script>
 	import { goto } from '$app/navigation';
+	import plants, { loadPlants } from '../../stores/plants.store';
 
-	export let plant;
 	export let id;
+
+	let plant = {};
+
+	plants.subscribe((value) => {
+		plant = value.find((p) => p.id === id);
+	});
 
 	async function onClickDelete(e) {
 		e.preventDefault();
 
-		await fetch(`/api/plants/${id}`, {
+		const res = await fetch(`/api/plants/${id}`, {
 			method: 'DELETE'
 		});
 
-		goto('/');
+		if (res.ok) {
+			await loadPlants(fetch);
+			await goto('/');
+		}
 	}
 </script>
 
-<h1>Plants {plant.name}</h1>
+<h2>Plant</h2>
 
-<p>{plant.schedule}</p>
+<p>{plant?.name}</p>
 
 <button on:click={onClickDelete}>Delete</button>
