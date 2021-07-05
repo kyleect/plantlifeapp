@@ -68,7 +68,7 @@
 	<tbody>
 		{#each plants as plant}
 			<tr>
-				<td>{plant.name}</td>
+				<td><a href={`/plants/${plant.id}`}>{plant.name}</a></td>
 				<td>{plant.schedule}</td>
 			</tr>
 		{/each}
