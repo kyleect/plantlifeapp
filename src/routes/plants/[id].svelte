@@ -10,7 +10,7 @@
 	}
 
 	async function loadPlant(fetch, id) {
-		const url = `/plants/${id}.json`;
+		const url = `/api/plants/${id}`;
 		const res = await fetch(url);
 
 		if (res.ok) {
@@ -28,7 +28,7 @@
 	async function onClickDelete(e) {
 		e.preventDefault();
 
-		await fetch(`/plants/${id}.json`, {
+		await fetch(`/api/plants/${id}`, {
 			method: 'DELETE'
 		});
 

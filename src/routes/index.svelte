@@ -10,7 +10,7 @@
 	}
 
 	async function loadPlants(fetch) {
-		const url = `/plants`;
+		const url = `/api/plants`;
 		const res = await fetch(url);
 
 		if (res.ok) {
@@ -28,7 +28,7 @@
 	async function onSubmit(e) {
 		e.preventDefault();
 
-		await fetch('/plants', {
+		await fetch('/api/plants', {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
