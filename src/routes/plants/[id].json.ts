@@ -5,3 +5,13 @@ export async function get({params}) {
         body: result
     };
 }
+
+export async function del({params}) {
+    const result = await fetch(`http://localhost:3001/plant/${params.id}`, {
+        method: "DELETE"
+    });
+
+    return {
+        body: result
+    };
+}

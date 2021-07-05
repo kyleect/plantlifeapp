@@ -4,7 +4,7 @@
 
 		if (plant) {
 			return {
-				props: { plant }
+				props: { plant, id: page.params.id }
 			};
 		}
 	}
@@ -20,9 +20,24 @@
 </script>
 
 <script>
+	import { goto } from '$app/navigation';
+
 	export let plant;
+	export let id;
+
+	async function onClickDelete(e) {
+		e.preventDefault();
+
+		await fetch(`/plants/${id}.json`, {
+			method: 'DELETE'
+		});
+
+		goto('/');
+	}
 </script>
 
 <h1>Plants {plant.name}</h1>
 
 <p>{plant.schedule}</p>
+
+<button on:click={onClickDelete}>Delete</button>
