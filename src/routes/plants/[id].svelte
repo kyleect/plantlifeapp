@@ -1,36 +1,18 @@
-<script context="module">
-	export function load({ page }) {
-		return {
-			props: {
-				id: parseInt(page.params.id, 10)
-			}
-		};
-	}
-</script>
-
 <script>
+	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import plants, { loadPlants } from '../../stores/plants.store';
+	import plants, { deletePlant } from '../../stores/plants.store';
 
-	export let id;
+	const id = parseInt($page.params.id, 10);
 
 	let plant = {};
-
 	plants.subscribe((value) => {
 		plant = value.find((p) => p.id === id);
 	});
 
-	async function onClickDelete(e) {
-		e.preventDefault();
-
-		const res = await fetch(`/api/plants/${id}`, {
-			method: 'DELETE'
-		});
-
-		if (res.ok) {
-			await loadPlants(fetch);
-			await goto('/');
-		}
+	async function onClickDelete() {
+		await deletePlant(id);
+		await goto('/');
 	}
 </script>
 
@@ -38,4 +20,4 @@
 
 <p>{plant?.name}</p>
 
-<button on:click={onClickDelete}>Delete</button>
+<button on:click|preventDefault={onClickDelete}>Delete</button>

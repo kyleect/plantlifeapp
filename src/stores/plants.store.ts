@@ -13,3 +13,15 @@ export async function loadPlants(fetch) {
         plants.set(data);
     }
 }
+
+export async function deletePlant(id: number) {
+    const res = await fetch(`/api/plants/${id}`, {
+        method: 'DELETE'
+    });
+
+    if (res.ok) {
+        await loadPlants(fetch);
+    } else {
+        throw new Error(`Error deleting plant id=${id}`);
+    }
+}
