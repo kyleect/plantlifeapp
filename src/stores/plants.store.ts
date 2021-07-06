@@ -4,6 +4,23 @@ const plants = writable([]);
 
 export default plants;
 
+export async function createPlant(name: string, schedule: string) {
+    const res = await fetch('/api/plants', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, schedule })
+    });
+
+    if (res.ok) {
+        await loadPlants(fetch);
+    } else {
+        throw new Error(`Error creating plant name=${name}, schedule=${schedule}`);
+    }
+}
+
 export async function loadPlants(fetch) {
     const url = `/api/plants`;
     const res = await fetch(url);
