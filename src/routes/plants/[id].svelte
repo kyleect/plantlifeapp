@@ -1,14 +1,12 @@
 <script>
+	import { derived } from 'svelte/store';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import plants, { deletePlant } from '../../stores/plants.store';
 
 	const id = parseInt($page.params.id, 10);
 
-	let plant = {};
-	plants.subscribe((value) => {
-		plant = value.find((p) => p.id === id);
-	});
+	const plant = derived(plants, ($plants) => $plants.find((p) => p.id === id));
 
 	async function onClickDelete() {
 		await deletePlant(id);
@@ -18,6 +16,6 @@
 
 <h2>Plant</h2>
 
-<p>{plant?.name}</p>
+<p>{$plant?.name}</p>
 
 <button on:click|preventDefault={onClickDelete}>Delete</button>
