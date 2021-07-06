@@ -1,11 +1,24 @@
-<script>
-	import { createPlant } from '../stores/plants.store';
+<script lang="ts">
+	import plants, { createPlant, updatePlant } from '../stores/plants.store';
+
+	export let id: number = null;
+
+	const plant = $plants.find((p) => p.id === id);
 
 	let name;
 	let schedule;
 
+	if (plant) {
+		name = plant.name;
+		schedule = plant.schedule;
+	}
+
 	async function onSubmit() {
-		createPlant(name, schedule);
+		if (id) {
+			updatePlant(id, name, schedule);
+		} else {
+			createPlant(name, schedule);
+		}
 
 		name = '';
 		schedule = '';

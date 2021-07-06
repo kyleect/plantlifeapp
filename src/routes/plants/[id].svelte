@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import plants, { deletePlant } from '../../stores/plants.store';
+	import PlantForm from '../../components/PlantForm.svelte';
 
 	const id = parseInt($page.params.id, 10);
 
@@ -19,3 +20,7 @@
 <p>{$plant?.name}</p>
 
 <button on:click|preventDefault={onClickDelete}>Delete</button>
+
+<h3>Update</h3>
+
+<PlantForm {id} />

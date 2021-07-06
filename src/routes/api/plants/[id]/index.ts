@@ -15,3 +15,18 @@ export async function del({params}) {
         body: result
     };
 }
+
+export async function patch({params, body}) {
+    const result = await fetch(`http://localhost:3001/plant/${params.id}`, {
+        method: "PATCH",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    }).then(res => res.json());
+
+    return {
+        body: result
+    };
+}

@@ -42,3 +42,20 @@ export async function deletePlant(id: number) {
         throw new Error(`Error deleting plant id=${id}`);
     }
 }
+
+export async function updatePlant(id: number, name: string, schedule: string) {
+    const res = await fetch(`/api/plants/${id}`, {
+        method: 'PATCH',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, schedule })
+    });
+
+    if (res.ok) {
+        await loadPlants(fetch);
+    } else {
+        throw new Error(`Error creating plant name=${name}, schedule=${schedule}`);
+    }
+}
