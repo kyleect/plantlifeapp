@@ -1,5 +1,6 @@
 <ul>
 	<li><a href="/">Home</a></li>
+	<li><a href="/plants/add">Add</a></li>
 </ul>
 
 <style>

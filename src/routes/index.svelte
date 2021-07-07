@@ -5,10 +5,6 @@
 
 <h2>Plants</h2>
 
-<h3>Add</h3>
-
-<PlantForm />
-
 {#if $plants.length > 0}
 	<h3>Existing</h3>
 

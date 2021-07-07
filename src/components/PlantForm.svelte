@@ -5,6 +5,8 @@
 
 	const plant = $plants.find((p) => p.id === id);
 
+	export let onSubmit = null;
+
 	let name;
 	let schedule;
 
@@ -13,19 +15,21 @@
 		schedule = plant.schedule;
 	}
 
-	async function onSubmit() {
+	async function onFormSubmit() {
 		if (id) {
 			updatePlant(id, name, schedule);
 		} else {
 			createPlant(name, schedule);
 		}
 
+		onSubmit?.call(null);
+
 		name = '';
 		schedule = '';
 	}
 </script>
 
-<form on:submit|preventDefault={onSubmit}>
+<form on:submit|preventDefault={onFormSubmit}>
 	<div>
 		<label for="name">Name</label><br />
 		<input type="text" name="name" id="name" bind:value={name} required />
@@ -36,5 +40,5 @@
 		<input type="text" name="schedule" id="schedule" bind:value={schedule} required />
 	</div>
 	<br />
-	<button>Add</button>
+	<button>{id ? 'Save' : 'Add'}</button>
 </form>

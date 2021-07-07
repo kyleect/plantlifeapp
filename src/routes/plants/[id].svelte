@@ -13,14 +13,27 @@
 		await deletePlant(id);
 		await goto('/');
 	}
+
+	async function onClickEdit() {
+		editing = !editing;
+	}
+
+	async function onEditSubmit() {
+		editing = false;
+	}
+
+	let editing = false;
 </script>
 
 <h2>Plant</h2>
 
 <p>{$plant?.name}</p>
 
+<button on:click|preventDefault={onClickEdit}>{editing ? 'Cancel' : 'Edit'}</button>
 <button on:click|preventDefault={onClickDelete}>Delete</button>
 
-<h3>Update</h3>
+{#if editing}
+	<h3>Update</h3>
 
-<PlantForm {id} />
+	<PlantForm {id} onSubmit={onEditSubmit} />
+{/if}
