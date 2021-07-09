@@ -13,7 +13,7 @@
 
 	async function onClickDelete() {
 		await deletePlant(id);
-		await goto('/');
+		await goto('/plants');
 	}
 
 	async function onClickEdit() {

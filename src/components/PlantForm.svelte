@@ -9,7 +9,7 @@
 	export let onSubmit = null;
 
 	let name;
-	let kindId;
+	let kindId = $kinds[0].id;
 
 	if (plant) {
 		name = plant.name;
@@ -27,7 +27,7 @@
 		onSubmit?.call(null);
 
 		name = '';
-		kindId = undefined;
+		kindId = $kinds[0].id;
 	}
 </script>
 

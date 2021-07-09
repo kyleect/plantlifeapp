@@ -3,7 +3,7 @@
 	import PlantForm from '../../components/PlantForm.svelte';
 
 	function onSubmit() {
-		goto('/');
+		goto('/plants');
 	}
 </script>
 
