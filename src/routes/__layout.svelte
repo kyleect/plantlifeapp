@@ -1,8 +1,10 @@
 <script context="module">
 	import { loadPlants } from '../stores/plants.store';
+	import { loadKinds } from '../stores/kinds.store';
 
 	export async function load({ fetch }) {
 		await loadPlants(fetch);
+		await loadKinds(fetch);
 
 		return {};
 	}

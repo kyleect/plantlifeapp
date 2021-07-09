@@ -1,5 +1,6 @@
 <script lang="ts">
 	import plants, { createPlant, updatePlant } from '../stores/plants.store';
+	import kinds from '../stores/kinds.store';
 
 	export let id: number = null;
 
@@ -8,24 +9,25 @@
 	export let onSubmit = null;
 
 	let name;
-	let schedule;
+	let kindId;
 
 	if (plant) {
 		name = plant.name;
-		schedule = plant.schedule;
+		const kind = $kinds.find((k) => k.id === plant.kindId);
+		kindId = kind.id;
 	}
 
 	async function onFormSubmit() {
 		if (id) {
-			updatePlant(id, name, schedule);
+			updatePlant(id, name, kindId);
 		} else {
-			createPlant(name, schedule);
+			createPlant(name, kindId);
 		}
 
 		onSubmit?.call(null);
 
 		name = '';
-		schedule = '';
+		kindId = undefined;
 	}
 </script>
 
@@ -36,8 +38,20 @@
 	</div>
 	<br />
 	<div>
-		<label for="schedule">Schedule</label><br />
-		<input type="text" name="schedule" id="schedule" bind:value={schedule} required />
+		<label for="kind">Kind</label><br />
+		<select
+			name="kind"
+			id="kind"
+			required
+			value={kindId}
+			on:blur={(e) => {
+				kindId = e.target.value;
+			}}
+		>
+			{#each $kinds as kind}
+				<option value={kind.id}>{kind.name}</option>
+			{/each}
+		</select>
 	</div>
 	<br />
 	<button>{id ? 'Save' : 'Add'}</button>

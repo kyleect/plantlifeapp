@@ -1,14 +1,13 @@
 export async function get() {
-	const result = await fetch('http://localhost:3001/plant');
-	const data = await result.json();
+	const result = await fetch('http://localhost:3001/kind').then((res) => res.json());
 
 	return {
-		body: data
+		body: result
 	};
 }
 
 export async function post(request) {
-	const result = await fetch('http://localhost:3001/plant', {
+	const result = await fetch('http://localhost:3001/kind', {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
