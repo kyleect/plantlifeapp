@@ -22,9 +22,9 @@
 
 	async function onFormSubmit() {
 		if (id) {
-			updatePlant(id, name, wateredAt, kindId);
+			updatePlant(id, name, new Date(wateredAt).valueOf(), kindId);
 		} else {
-			createPlant(name, wateredAt, kindId);
+			createPlant(name, new Date(wateredAt).valueOf(), kindId);
 		}
 
 		onSubmit?.call(null);
@@ -60,7 +60,7 @@
 	<br />
 	<div>
 		<label for="wateredAt">Last Watered</label>
-		<input type="date" bind:value={wateredAt} >
+		<input type="datetime-local" value={new Date(wateredAt).toISOString().substring(0, 16)} on:change={(e) => wateredAt = new Date(wateredAt).valueOf()}>
 	</div>
 	<br />
 	<button>{id ? 'Save' : 'Add'}</button>
