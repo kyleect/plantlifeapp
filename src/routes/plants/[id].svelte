@@ -31,7 +31,7 @@
 
 <p>{$plant?.name}</p>
 
-<p>Last Watered: {$plant?.wateredAt ?? 'Unknown'}</p>
+<p>Last Watered: {$plant?.wateredAt ? new Date($plant.wateredAt) : 'Unknown'}</p>
 
 <p>Spring Schedule: Every {$kind?.springSchedule} day/s</p>
 <p>Summer Schedule: Every {$kind?.summerSchedule} day/s</p>
