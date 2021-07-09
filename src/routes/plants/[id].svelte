@@ -9,9 +9,7 @@
 	const id = parseInt($page.params.id, 10);
 
 	const plant = derived(plants, ($plants) => $plants.find((p) => p.id === id));
-	const kind = derived([kinds, plant], ([$kinds, $plant]) => $kinds.find(kind => kind.id === $plant.kindId));
-
-	debugger;	
+	const kind = derived([kinds, plant], ([$kinds, $plant]) => $kinds.find(kind => kind.id === $plant?.kindId));
 
 	async function onClickDelete() {
 		await deletePlant(id);

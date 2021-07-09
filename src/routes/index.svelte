@@ -1,6 +1,5 @@
 <script>
 	import plants from '../stores/plants.store';
-	import PlantForm from '../components/PlantForm.svelte';
 </script>
 
 <h2>Plants</h2>
