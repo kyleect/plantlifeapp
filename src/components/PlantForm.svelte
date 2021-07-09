@@ -10,24 +10,28 @@
 
 	let name;
 	let kindId = $kinds[0].id;
+	let wateredAt = Date.now();
 
 	if (plant) {
 		name = plant.name;
+		wateredAt = plant.wateredAt;
+
 		const kind = $kinds.find((k) => k.id === plant.kindId);
 		kindId = kind.id;
 	}
 
 	async function onFormSubmit() {
 		if (id) {
-			updatePlant(id, name, kindId);
+			updatePlant(id, name, wateredAt, kindId);
 		} else {
-			createPlant(name, kindId);
+			createPlant(name, wateredAt, kindId);
 		}
 
 		onSubmit?.call(null);
 
 		name = '';
 		kindId = $kinds[0].id;
+		wateredAt = Date.now();
 	}
 </script>
 
@@ -52,6 +56,11 @@
 				<option value={kind.id}>{kind.name}</option>
 			{/each}
 		</select>
+	</div>
+	<br />
+	<div>
+		<label for="wateredAt">Last Watered</label>
+		<input type="date" bind:value={wateredAt} >
 	</div>
 	<br />
 	<button>{id ? 'Save' : 'Add'}</button>

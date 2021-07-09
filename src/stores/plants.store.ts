@@ -4,14 +4,14 @@ const plants = writable([]);
 
 export default plants;
 
-export async function createPlant(name: string, kindId: number) {
+export async function createPlant(name: string, wateredAt: number, kindId: number) {
 	const res = await fetch('/api/plants', {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({ name, kindId })
+		body: JSON.stringify({ name, wateredAt, kindId })
 	});
 
 	if (res.ok) {
@@ -43,7 +43,7 @@ export async function deletePlant(id: number) {
 	}
 }
 
-export async function updatePlant(id: number, name: string, kindId: number) {
+export async function updatePlant(id: number, name: string, wateredAt: number, kindId: number) {
 	debugger;
 	const res = await fetch(`/api/plants/${id}`, {
 		method: 'PATCH',
@@ -51,7 +51,7 @@ export async function updatePlant(id: number, name: string, kindId: number) {
 			Accept: 'application/json',
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({ name, kindId })
+		body: JSON.stringify({ name, wateredAt, kindId })
 	});
 
 	if (res.ok) {
