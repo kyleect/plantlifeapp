@@ -60,3 +60,20 @@ export async function updatePlant(id: number, name: string, wateredAt: number, k
 		throw new Error(`Error creating plant name=${name} kindId=${kindId}`);
 	}
 }
+
+export async function waterPlant(id: number) {
+	const res = await fetch(`/api/plants/${id}`, {
+		method: 'PATCH',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ wateredAt: Date.now() })
+	});
+
+	if (res.ok) {
+		await loadPlants(fetch);
+	} else {
+		throw new Error(`Error watering plant id=${id}`);
+	}
+}

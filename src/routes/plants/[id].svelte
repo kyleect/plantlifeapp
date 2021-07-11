@@ -2,7 +2,7 @@
 	import { derived } from 'svelte/store';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import plants, { deletePlant } from '../../stores/plants.store';
+	import plants, { deletePlant, waterPlant } from '../../stores/plants.store';
 	import PlantForm from '../../components/PlantForm.svelte';
 	import kinds from '../../stores/kinds.store';
 
@@ -24,6 +24,10 @@
 		editing = false;
 	}
 
+	async function onClickWater() {
+		await waterPlant(id);
+	}
+
 	let editing = false;
 </script>
 
@@ -32,6 +36,8 @@
 <p>{$plant?.name}</p>
 
 <p>Last Watered: {$plant?.wateredAt ? new Date($plant.wateredAt) : 'Unknown'}</p>
+
+<button on:click|preventDefault={onClickWater}>Water</button>
 
 <p>Spring Schedule: Every {$kind?.springSchedule} day/s</p>
 <p>Summer Schedule: Every {$kind?.summerSchedule} day/s</p>

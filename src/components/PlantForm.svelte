@@ -58,10 +58,12 @@
 		</select>
 	</div>
 	<br />
-	<div>
-		<label for="wateredAt">Last Watered</label>
-		<input type="datetime-local" value={new Date(wateredAt).toISOString().substring(0, 16)} on:change={(e) => wateredAt = new Date(wateredAt).valueOf()}>
-	</div>
-	<br />
+	{#if !plant}
+		<div>
+			<label for="wateredAt">Last Watered</label>
+			<input type="datetime-local" value={new Date(wateredAt).toISOString().substring(0, 16)} on:change={(e) => wateredAt = new Date(wateredAt).valueOf()}>
+		</div>
+		<br />
+	{/if}
 	<button>{id ? 'Save' : 'Add'}</button>
 </form>
