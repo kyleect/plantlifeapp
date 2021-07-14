@@ -10,8 +10,10 @@
 {#if $plants.length > 0}
 	<ul>
 		{#each $plants as plant}
-			<li class="border-b-2 hover:bg-gray-50">
-				<a class="block p-2" href={`/plants/${plant.id}`}>{plant.name}</a>
+			<li>
+				<a class="block p-2 border-b-2 hover:bg-gray-50" href={`/plants/${plant.id}`}
+					>{plant.name}</a
+				>
 			</li>
 		{/each}
 	</ul>
