@@ -1,6 +1,7 @@
 <script lang="ts">
 	import plants, { createPlant, updatePlant } from '../stores/plants.store';
 	import kinds from '../stores/kinds.store';
+	import Button from '../components/Button.svelte';
 
 	export let id: number = null;
 
@@ -37,12 +38,18 @@
 
 <form on:submit|preventDefault={onFormSubmit}>
 	<div>
-		<label for="name">Name</label><br />
-		<input type="text" name="name" id="name" bind:value={name} required />
+		<label for="name" class="font-bold">Name</label><br />
+		<input
+			type="text"
+			name="name"
+			id="name"
+			bind:value={name}
+			required
+			class="p-2 border-2 w-full"
+		/>
 	</div>
-	<br />
 	<div>
-		<label for="kind">Kind</label><br />
+		<label for="kind" class="font-bold">Kind</label><br />
 		<select
 			name="kind"
 			id="kind"
@@ -51,19 +58,23 @@
 			on:blur={(e) => {
 				kindId = e.target.value;
 			}}
+			class="p-2 border-2 w-full"
 		>
 			{#each $kinds as kind}
 				<option value={kind.id}>{kind.name}</option>
 			{/each}
 		</select>
 	</div>
-	<br />
 	{#if !plant}
 		<div>
-			<label for="wateredAt">Last Watered</label>
-			<input type="datetime-local" value={new Date(wateredAt).toISOString().substring(0, 16)} on:change={(e) => wateredAt = new Date(wateredAt).valueOf()}>
+			<label for="wateredAt" class="font-bold">Last Watered</label><br />
+			<input
+				type="datetime-local"
+				value={new Date(wateredAt).toISOString().substring(0, 16)}
+				on:change={(e) => (wateredAt = new Date(wateredAt).valueOf())}
+				class="p-2 border-2 w-full"
+			/>
 		</div>
-		<br />
 	{/if}
-	<button>{id ? 'Save' : 'Add'}</button>
+	<Button>{id ? 'Save' : 'Add'}</Button>
 </form>

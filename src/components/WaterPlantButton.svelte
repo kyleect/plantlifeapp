@@ -1,10 +1,13 @@
 <script>
-    import { waterPlant } from '../stores/plants.store';
-    export let plantId;
+	import { waterPlant } from '../stores/plants.store';
+	import Button from './Button.svelte';
 
-    function onClick() {
-        waterPlant(plantId);
-    }
+	export let plantId;
+
+	function onClick(e) {
+		e.preventDefault();
+		waterPlant(plantId);
+	}
 </script>
 
-<button on:click|preventDefault={onClick}>Water</button>
+<Button {onClick}>Water</Button>

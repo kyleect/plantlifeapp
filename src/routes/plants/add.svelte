@@ -7,6 +7,4 @@
 	}
 </script>
 
-<h2>Add Plant</h2>
-
 <PlantForm {onSubmit} />

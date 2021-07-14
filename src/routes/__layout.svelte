@@ -11,6 +11,7 @@
 </script>
 
 <script>
+	import '../tailwind.css';
 	import Nav from '../components/Nav.svelte';
 </script>
 
@@ -19,7 +20,5 @@
 </svelte:head>
 
 <Nav />
-
-<h1>Plant Life</h1>
 
 <slot />

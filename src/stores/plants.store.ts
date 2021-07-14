@@ -52,7 +52,6 @@ export async function deletePlant(id: number) {
 }
 
 export async function updatePlant(id: number, name: string, wateredAt: number, kindId: number) {
-	debugger;
 	const res = await fetch(`/api/plants/${id}`, {
 		method: 'PATCH',
 		headers: {
@@ -91,7 +90,6 @@ export async function loadWateringPlantIds(fetch) {
 
 	if (res.ok) {
 		const data = await res.json();
-		debugger;
 		wateringPlantIds.set(data);
 	}
 }
