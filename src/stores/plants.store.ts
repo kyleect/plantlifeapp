@@ -1,8 +1,14 @@
-import { writable } from 'svelte/store';
+import { derived, writable } from 'svelte/store';
 
 const plants = writable([]);
 
 export default plants;
+
+export const wateringPlantIds = writable([]);
+
+export const wateringPlants = derived([plants, wateringPlantIds], ([$plants, $wateringPlantIds]) =>
+	$plants.filter((plant) => $wateringPlantIds.includes(plant.id))
+);
 
 export async function createPlant(name: string, wateredAt: number, kindId: number) {
 	const res = await fetch('/api/plants', {
@@ -28,6 +34,8 @@ export async function loadPlants(fetch) {
 	if (res.ok) {
 		const data = await res.json();
 		plants.set(data);
+
+		await loadWateringPlantIds(fetch);
 	}
 }
 
@@ -75,5 +83,15 @@ export async function waterPlant(id: number) {
 		await loadPlants(fetch);
 	} else {
 		throw new Error(`Error watering plant id=${id}`);
+	}
+}
+
+export async function loadWateringPlantIds(fetch) {
+	const res = await fetch(`/api/plants/watering`);
+
+	if (res.ok) {
+		const data = await res.json();
+		debugger;
+		wateringPlantIds.set(data);
 	}
 }

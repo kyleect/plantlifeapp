@@ -4,6 +4,7 @@
 	import { goto } from '$app/navigation';
 	import plants, { deletePlant, waterPlant } from '../../stores/plants.store';
 	import PlantForm from '../../components/PlantForm.svelte';
+	import WaterPlantButton from '../../components/WaterPlantButton.svelte';
 	import kinds from '../../stores/kinds.store';
 
 	const id = parseInt($page.params.id, 10);
@@ -37,7 +38,7 @@
 
 <p>Last Watered: {$plant?.wateredAt ? new Date($plant.wateredAt) : 'Unknown'}</p>
 
-<button on:click|preventDefault={onClickWater}>Water</button>
+<WaterPlantButton plantId={id} />
 
 <p>Spring Schedule: Every {$kind?.springSchedule} day/s</p>
 <p>Summer Schedule: Every {$kind?.summerSchedule} day/s</p>
