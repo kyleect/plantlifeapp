@@ -8,4 +8,4 @@
 	}
 </script>
 
-<button on:click={onClickButton} class="p-2 bg-pink-500 text-white"><slot /></button>
+<button on:click={onClickButton} class="p-2 bg-gray-500 text-white"><slot /></button>

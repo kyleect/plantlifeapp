@@ -1,7 +1,5 @@
 <script>
 	import { page } from '$app/stores';
-
-	$: console.log($page.path);
 </script>
 
 <nav class="border-b-2">
