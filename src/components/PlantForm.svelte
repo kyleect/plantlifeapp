@@ -76,5 +76,5 @@
 			/>
 		</div>
 	{/if}
-	<Button>{id ? 'Save' : 'Add'}</Button>
+	<Button>Save</Button>
 </form>
