@@ -1,5 +1,5 @@
 export async function get() {
-	const result = await fetch('http://localhost:3001/plant/watering');
+	const result = await fetch(`${process.env.API_URL}/plant/watering`);
 	const data = await result.json();
 
 	return {

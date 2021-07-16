@@ -1,5 +1,5 @@
 export async function get() {
-	const result = await fetch('http://localhost:3001/plant');
+	const result = await fetch(`${process.env.API_URL}/plant`);
 	const data = await result.json();
 
 	return {
@@ -8,7 +8,7 @@ export async function get() {
 }
 
 export async function post(request) {
-	const result = await fetch('http://localhost:3001/plant', {
+	const result = await fetch(`${process.env.API_URL}/plant`, {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
